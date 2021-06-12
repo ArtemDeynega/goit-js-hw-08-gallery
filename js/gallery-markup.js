@@ -37,8 +37,8 @@ const createsList = item => {
     return liEl;
 };
 
-const galleryMarkup = a => {
-    const items = a.map(item => createsList(item));
+const galleryMarkup = arg => {
+    const items = arg.map(item => createsList(item));
 
     galleryList.append(...items);
 };
