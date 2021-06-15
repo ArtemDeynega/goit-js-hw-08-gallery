@@ -29,6 +29,7 @@ function isOpenModal(evt) {
 
     window.addEventListener('keydown', onKeyPressEsc);
     window.addEventListener('keydown', onKeyPressArrowLeft);
+    window.addEventListener('keydown', onKeyPressArrowRight);
 }
 // закрытие модалки
 
@@ -54,4 +55,41 @@ function onKeyPressEsc(evt) {
     }
 }
 
-function onKeyPressArrowLeft(evt) {}
+function onKeyPressArrowLeft(evt) {
+    // console.log(evt.code);
+    if (evt.code === 'ArrowLeft') {
+        const src = gallery.map(({ original }) => original);
+        const alt = gallery.map(({ description }) => description);
+
+        let currentSrc = src.indexOf(refs.lightboxImage.src);
+        let currentAlt = alt.indexOf(refs.lightboxImage.alt);
+
+        if (currentSrc === 0 && currentAlt === 0) {
+            currentSrc = src.length;
+            currentAlt = alt.length;
+        }
+
+        refs.lightboxImage.src = src[currentSrc - 1];
+        refs.lightboxImage.alt = alt[currentAlt - 1];
+    }
+}
+
+function onKeyPressArrowRight(evt) {
+    if (evt.code === 'ArrowRight') {
+        const src = gallery.map(({ original }) => original);
+        const alt = gallery.map(({ description }) => description);
+
+        let currentSrc = src.indexOf(refs.lightboxImage.src);
+        let currentAlt = alt.indexOf(refs.lightboxImage.alt);
+
+        if (
+            currentSrc + 1 > src.length - 1 &&
+            currentAlt + 1 > alt.length - 1
+        ) {
+            currentAlt = -1;
+            currentSrc = -1;
+        }
+        refs.lightboxImage.src = src[currentSrc + 1];
+        refs.lightboxImage.alt = alt[currentAlt + 1];
+    }
+}
