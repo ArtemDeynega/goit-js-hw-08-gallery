@@ -14,9 +14,12 @@ const refs = {
 
 refs.galleryList.addEventListener('click', isOpenModal);
 refs.lightboxCloseButton.addEventListener('click', isCloseModal);
-// refs.lightboxOverlay.addEventListener('click', isCloseOverlay);
+refs.lightboxOverlay.addEventListener(
+    'click',
+    isCloseModalEscAndOverlay,
+);
 
-window.addEventListener('keydown', onKeyPressEsc);
+window.addEventListener('keydown', isCloseModalEscAndOverlay);
 window.addEventListener('keydown', onKeyPressArrowLeft);
 window.addEventListener('keydown', onKeyPressArrowRight);
 
@@ -48,9 +51,9 @@ function isCloseModal(evt) {
 
 // Клавиши
 
-function onKeyPressEsc(evt) {
+function isCloseModalEscAndOverlay(evt) {
     // console.log(evt.code);
-    if (evt.code === 'Escape' || evt.currentTarget === evt.target) {
+    if (evt.currentTarget === evt.target || evt.code === 'Escape') {
         isCloseModal();
     }
 }
