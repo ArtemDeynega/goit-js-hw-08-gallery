@@ -14,7 +14,11 @@ const refs = {
 
 refs.galleryList.addEventListener('click', isOpenModal);
 refs.lightboxCloseButton.addEventListener('click', isCloseModal);
-refs.lightboxOverlay.addEventListener('click', isCloseOverlay);
+// refs.lightboxOverlay.addEventListener('click', isCloseOverlay);
+
+window.addEventListener('keydown', onKeyPressEsc);
+window.addEventListener('keydown', onKeyPressArrowLeft);
+window.addEventListener('keydown', onKeyPressArrowRight);
 
 // отрытие модалки
 function isOpenModal(evt) {
@@ -26,10 +30,6 @@ function isOpenModal(evt) {
     refs.lightbox.classList.add('is-open');
     refs.lightboxImage.src = evt.target.dataset.source;
     refs.lightboxImage.alt = evt.target.alt;
-
-    window.addEventListener('keydown', onKeyPressEsc);
-    window.addEventListener('keydown', onKeyPressArrowLeft);
-    window.addEventListener('keydown', onKeyPressArrowRight);
 }
 // закрытие модалки
 
@@ -40,17 +40,17 @@ function isCloseModal(evt) {
 }
 
 // Закрытие оверлей
-function isCloseOverlay(evt) {
-    if (evt.currentTarget === evt.target) {
-        isCloseModal();
-    }
-}
+// function isCloseOverlay(evt) {
+//     if (evt.currentTarget === evt.target) {
+//         isCloseModal();
+//     }
+// }
 
 // Клавиши
 
 function onKeyPressEsc(evt) {
     // console.log(evt.code);
-    if (evt.code === 'Escape') {
+    if (evt.code === 'Escape' || evt.currentTarget === evt.target) {
         isCloseModal();
     }
 }
